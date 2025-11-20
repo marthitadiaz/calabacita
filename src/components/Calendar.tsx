@@ -16,7 +16,7 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
 
-  const dayNames = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const dayNames = ["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB"];
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -25,9 +25,8 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
     const lastDay = new Date(year, month + 1, 0);
     
     // Get day of week (0 = Sunday, 1 = Monday, etc.)
-    let firstDayOfWeek = firstDay.getDay();
-    // Adjust so Monday = 0
-    firstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+    // En estructura latinoamericana, domingo es el primer día
+    const firstDayOfWeek = firstDay.getDay();
     
     const daysInMonth = lastDay.getDate();
     
@@ -59,7 +58,7 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
     return reminders[formatDateKey(date)];
   };
 
-  const dayColors = ["kawaii-mint", "kawaii-coral", "kawaii-peach", "kawaii-mint", "kawaii-coral", "kawaii-peach", "kawaii-mint"];
+  const dayColors = ["kawaii-mint", "kawaii-coral", "kawaii-peach", "kawaii-lavender", "kawaii-coral", "kawaii-peach", "kawaii-mint"];
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -96,13 +95,13 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
               key={day}
               className={`bg-${dayColors[index]} text-white font-semibold py-3 px-2 rounded-2xl text-center text-sm shadow-md`}
               style={{
-                backgroundColor: index === 0 ? "hsl(160, 60%, 65%)" :
-                               index === 1 ? "hsl(10, 100%, 75%)" :
-                               index === 2 ? "hsl(40, 100%, 75%)" :
-                               index === 3 ? "hsl(160, 60%, 65%)" :
-                               index === 4 ? "hsl(10, 100%, 75%)" :
-                               index === 5 ? "hsl(40, 100%, 75%)" :
-                               "hsl(160, 60%, 65%)"
+                backgroundColor: index === 0 ? "hsl(160, 70%, 75%)" :
+                               index === 1 ? "hsl(10, 100%, 80%)" :
+                               index === 2 ? "hsl(20, 100%, 85%)" :
+                               index === 3 ? "hsl(270, 100%, 90%)" :
+                               index === 4 ? "hsl(10, 100%, 80%)" :
+                               index === 5 ? "hsl(20, 100%, 85%)" :
+                               "hsl(160, 70%, 75%)"
               }}
             >
               {day}
