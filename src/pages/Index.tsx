@@ -17,16 +17,26 @@ const Index = () => {
     }
   }, []);
 
-  // Check for today's reminder
+  // Check for today's reminder on load
   useEffect(() => {
     const today = new Date();
     const todayKey = formatDateKey(today);
     if (reminders[todayKey]) {
       setCurrentReminder(reminders[todayKey]);
-    } else {
-      setCurrentReminder(null);
     }
-  }, [reminders]);
+  }, []);
+
+  // Update reminder when date is selected or reminders change
+  useEffect(() => {
+    if (selectedDate) {
+      const dateKey = formatDateKey(selectedDate);
+      setCurrentReminder(reminders[dateKey] || null);
+    } else {
+      const today = new Date();
+      const todayKey = formatDateKey(today);
+      setCurrentReminder(reminders[todayKey] || null);
+    }
+  }, [selectedDate, reminders]);
 
   const formatDateKey = (date: Date) => {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -67,11 +77,11 @@ const Index = () => {
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-3">
             <span>🐕</span>
-            Mi Planner Kawaii
+            Recordatorios
             <span>💕</span>
           </h1>
           <p className="text-lg text-muted-foreground">
-            Organiza tus días con tu perrita chihuahua
+            Calabacita te recuerda
           </p>
         </div>
 
