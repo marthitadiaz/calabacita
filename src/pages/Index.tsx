@@ -1,12 +1,130 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import Calendar from "@/components/Calendar";
+import ChihuahuaCharacter from "@/components/ChihuahuaCharacter";
+import ReminderDialog from "@/components/ReminderDialog";
 
 const Index = () => {
+  const [reminders, setReminders] = useState<Record<string, string>>({});
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [currentReminder, setCurrentReminder] = useState<string | null>(null);
+
+  // Load reminders from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("kawaii-reminders");
+    if (saved) {
+      setReminders(JSON.parse(saved));
+    }
+  }, []);
+
+  // Check for today's reminder
+  useEffect(() => {
+    const today = new Date();
+    const todayKey = formatDateKey(today);
+    if (reminders[todayKey]) {
+      setCurrentReminder(reminders[todayKey]);
+    } else {
+      setCurrentReminder(null);
+    }
+  }, [reminders]);
+
+  const formatDateKey = (date: Date) => {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  };
+
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+    setDialogOpen(true);
+  };
+
+  const handleSaveReminder = (date: Date, reminder: string) => {
+    const dateKey = formatDateKey(date);
+    const newReminders = { ...reminders, [dateKey]: reminder };
+    setReminders(newReminders);
+    localStorage.setItem("kawaii-reminders", JSON.stringify(newReminders));
+  };
+
+  const handleDeleteReminder = (date: Date) => {
+    const dateKey = formatDateKey(date);
+    const newReminders = { ...reminders };
+    delete newReminders[dateKey];
+    setReminders(newReminders);
+    localStorage.setItem("kawaii-reminders", JSON.stringify(newReminders));
+  };
+
+  const existingReminder = selectedDate ? reminders[formatDateKey(selectedDate)] : undefined;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background py-8 px-4 overflow-hidden relative">
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 text-4xl animate-bounce">✨</div>
+      <div className="absolute top-20 right-20 text-4xl animate-bounce" style={{ animationDelay: "0.3s" }}>🌟</div>
+      <div className="absolute bottom-20 left-20 text-4xl animate-bounce" style={{ animationDelay: "0.6s" }}>💝</div>
+      <div className="absolute bottom-32 right-16 text-4xl animate-bounce" style={{ animationDelay: "0.9s" }}>🎀</div>
+
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-3">
+            <span>🐕</span>
+            Mi Planner Kawaii
+            <span>💕</span>
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Organiza tus días con tu perrita chihuahua
+          </p>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Calendar Section */}
+          <div className="bounce-in">
+            <Calendar onDateSelect={handleDateSelect} reminders={reminders} />
+          </div>
+
+          {/* Character Section */}
+          <div className="flex items-center justify-center lg:min-h-[600px]">
+            <ChihuahuaCharacter currentReminder={currentReminder} />
+          </div>
+        </div>
+
+        {/* Instructions */}
+        <div className="mt-12 bg-kawaii-lavender rounded-3xl p-6 shadow-lg max-w-2xl mx-auto bounce-in">
+          <h2 className="text-2xl font-bold text-center mb-4 flex items-center justify-center gap-2">
+            <span>📝</span>
+            Cómo usar tu planner
+            <span>✨</span>
+          </h2>
+          <ul className="space-y-2 text-foreground">
+            <li className="flex items-start gap-2">
+              <span className="text-xl">🐾</span>
+              <span>Haz clic en cualquier día del calendario para agregar un recordatorio</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-xl">💕</span>
+              <span>Los días con recordatorios tendrán un puntito rosa</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-xl">🗨️</span>
+              <span>Los recordatorios del día aparecerán en la burbuja de tu perrita</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-xl">✏️</span>
+              <span>Puedes editar o borrar recordatorios haciendo clic en el día</span>
+            </li>
+          </ul>
+        </div>
       </div>
+
+      {/* Reminder Dialog */}
+      <ReminderDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        selectedDate={selectedDate}
+        onSave={handleSaveReminder}
+        onDelete={handleDeleteReminder}
+        existingReminder={existingReminder}
+      />
     </div>
   );
 };

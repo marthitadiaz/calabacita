@@ -47,6 +47,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        kawaii: {
+          pink: "hsl(var(--kawaii-pink))",
+          cream: "hsl(var(--kawaii-cream))",
+          lavender: "hsl(var(--kawaii-lavender))",
+          yellow: "hsl(var(--kawaii-yellow))",
+          coral: "hsl(var(--kawaii-coral))",
+          mint: "hsl(var(--kawaii-mint))",
+          peach: "hsl(var(--kawaii-peach))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
