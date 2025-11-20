@@ -39,13 +39,13 @@ All colors MUST be HSL.
     --radius: 1.5rem;
     
     /* Kawaii custom colors */
-    --kawaii-pink: 330 100% 88%;
+    --kawaii-pink: 330 100% 85%;
     --kawaii-cream: 40 100% 97%;
-    --kawaii-lavender: 280 100% 95%;
+    --kawaii-lavender: 270 100% 90%;
     --kawaii-yellow: 48 100% 76%;
-    --kawaii-coral: 10 100% 85%;
-    --kawaii-mint: 160 60% 85%;
-    --kawaii-peach: 20 100% 88%;
+    --kawaii-coral: 10 100% 80%;
+    --kawaii-mint: 160 70% 75%;
+    --kawaii-peach: 20 100% 85%;
 
     --sidebar-background: 0 0% 98%;
 

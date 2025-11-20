@@ -64,18 +64,18 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       {/* Calendar Header */}
-      <div className="bg-kawaii-pink rounded-t-3xl p-6 shadow-lg">
+      <div className="bg-gradient-to-br from-kawaii-pink via-kawaii-lavender to-kawaii-peach rounded-t-3xl p-6 shadow-lg">
         <div className="flex items-center justify-between mb-6">
           <Button
             variant="ghost"
             size="icon"
             onClick={handlePrevMonth}
-            className="hover:bg-white/50 rounded-full"
+            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all"
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           
-          <h2 className="text-2xl font-bold text-foreground">
+          <h2 className="text-2xl font-bold text-foreground drop-shadow-sm">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h2>
           
@@ -83,7 +83,7 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
             variant="ghost"
             size="icon"
             onClick={handleNextMonth}
-            className="hover:bg-white/50 rounded-full"
+            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all"
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
@@ -134,10 +134,10 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
                 className={`
                   aspect-square rounded-2xl font-medium text-lg
                   transition-all duration-200
-                  hover:scale-105 hover:shadow-lg
-                  ${isToday ? 'ring-4 ring-accent' : ''}
-                  ${reminder ? 'bg-accent text-accent-foreground' : 'bg-kawaii-cream text-foreground'}
-                  ${selectedDate?.getDate() === day ? 'scale-105 shadow-lg' : ''}
+                  hover:scale-110 hover:shadow-xl hover:bg-white hover:ring-2 hover:ring-accent
+                  ${isToday ? 'ring-4 ring-yellow-400 ring-offset-2' : ''}
+                  ${reminder ? 'bg-gradient-to-br from-accent to-primary text-white shadow-md' : 'bg-kawaii-cream text-foreground'}
+                  ${selectedDate?.getDate() === day && selectedDate?.getMonth() === currentDate.getMonth() ? 'scale-105 shadow-lg ring-2 ring-secondary' : ''}
                   relative overflow-hidden
                   bounce-in
                 `}
@@ -147,7 +147,9 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
               >
                 {day}
                 {reminder && (
-                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-primary rounded-full" />
+                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
+                    <span className="text-xs">💕</span>
+                  </div>
                 )}
               </button>
             );
