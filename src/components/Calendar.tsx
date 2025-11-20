@@ -61,20 +61,20 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
   const dayColors = ["kawaii-mint", "kawaii-coral", "kawaii-peach", "kawaii-lavender", "kawaii-coral", "kawaii-peach", "kawaii-mint"];
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto px-2 md:px-0">
       {/* Calendar Header */}
-      <div className="bg-gradient-to-br from-kawaii-pink via-kawaii-lavender to-kawaii-peach rounded-t-3xl p-6 shadow-lg">
-        <div className="flex items-center justify-between mb-6">
+      <div className="bg-gradient-to-br from-kawaii-pink via-kawaii-lavender to-kawaii-peach rounded-t-2xl md:rounded-t-3xl p-3 md:p-6 shadow-lg">
+        <div className="flex items-center justify-between mb-3 md:mb-6">
           <Button
             variant="ghost"
             size="icon"
             onClick={handlePrevMonth}
-            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all"
+            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all h-8 w-8 md:h-10 md:w-10"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-4 w-4 md:h-6 md:w-6" />
           </Button>
           
-          <h2 className="text-2xl font-bold text-foreground drop-shadow-sm">
+          <h2 className="text-lg md:text-2xl font-bold text-foreground drop-shadow-sm">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h2>
           
@@ -82,18 +82,18 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
             variant="ghost"
             size="icon"
             onClick={handleNextMonth}
-            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all"
+            className="hover:bg-white/60 hover:scale-110 rounded-full transition-all h-8 w-8 md:h-10 md:w-10"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-4 w-4 md:h-6 md:w-6" />
           </Button>
         </div>
 
         {/* Day Names */}
-        <div className="grid grid-cols-7 gap-2 mb-4">
+        <div className="grid grid-cols-7 gap-1 md:gap-2 mb-2 md:mb-4">
           {dayNames.map((day, index) => (
             <div
               key={day}
-              className={`bg-${dayColors[index]} text-white font-semibold py-3 px-2 rounded-2xl text-center text-sm shadow-md`}
+              className={`bg-${dayColors[index]} text-white font-semibold py-2 md:py-3 px-1 md:px-2 rounded-xl md:rounded-2xl text-center text-xs md:text-sm shadow-md`}
               style={{
                 backgroundColor: index === 0 ? "hsl(160, 70%, 75%)" :
                                index === 1 ? "hsl(10, 100%, 80%)" :
@@ -110,7 +110,7 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
         </div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-1 md:gap-2">
           {/* Empty cells for days before month starts */}
           {Array.from({ length: firstDayOfWeek }).map((_, index) => (
             <div key={`empty-${index}`} className="aspect-square" />
@@ -131,14 +131,15 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
                 key={day}
                 onClick={() => handleDateClick(day)}
                 className={`
-                  aspect-square rounded-2xl font-medium text-lg
+                  aspect-square rounded-xl md:rounded-2xl font-medium text-sm md:text-lg
                   transition-all duration-200
                   hover:scale-110 hover:shadow-xl hover:bg-white hover:ring-2 hover:ring-accent
-                  ${isToday ? 'ring-4 ring-yellow-400 ring-offset-2' : ''}
+                  ${isToday ? 'ring-2 md:ring-4 ring-yellow-400 ring-offset-1 md:ring-offset-2' : ''}
                   ${reminder ? 'bg-gradient-to-br from-accent to-primary text-white shadow-md' : 'bg-kawaii-cream text-foreground'}
                   ${selectedDate?.getDate() === day && selectedDate?.getMonth() === currentDate.getMonth() ? 'scale-105 shadow-lg ring-2 ring-secondary' : ''}
                   relative overflow-hidden
                   bounce-in
+                  flex items-center justify-center
                 `}
                 style={{
                   animationDelay: `${index * 0.01}s`
@@ -146,8 +147,8 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
               >
                 {day}
                 {reminder && (
-                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
-                    <span className="text-xs">💕</span>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-[8px] md:text-xs">
+                    💕
                   </div>
                 )}
               </button>

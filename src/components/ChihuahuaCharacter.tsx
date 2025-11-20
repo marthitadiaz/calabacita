@@ -28,20 +28,20 @@ const ChihuahuaCharacter = ({ currentReminder }: ChihuahuaCharacterProps) => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center justify-center px-4">
       {/* Speech Bubble */}
       {currentReminder && (
-        <div className="relative mb-8 bounce-in">
-          <div className="bg-white border-4 border-primary rounded-3xl px-6 py-4 shadow-lg max-w-xs">
-            <p className="text-center text-foreground font-medium">
+        <div className="relative mb-4 md:mb-8 bounce-in">
+          <div className="bg-white border-2 md:border-4 border-primary rounded-2xl md:rounded-3xl px-4 md:px-6 py-3 md:py-4 shadow-lg max-w-[280px] md:max-w-xs">
+            <p className="text-center text-foreground font-medium text-sm md:text-base">
               {currentReminder}
             </p>
           </div>
           {/* Bubble tail */}
-          <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
-            <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-t-[20px] border-t-primary" />
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[16px]">
-              <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[16px] border-t-white" />
+          <div className="absolute -bottom-3 md:-bottom-4 left-1/2 transform -translate-x-1/2">
+            <div className="w-0 h-0 border-l-[12px] md:border-l-[15px] border-l-transparent border-r-[12px] md:border-r-[15px] border-r-transparent border-t-[16px] md:border-t-[20px] border-t-primary" />
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[13px] md:-translate-y-[16px]">
+              <div className="w-0 h-0 border-l-[10px] md:border-l-[12px] border-l-transparent border-r-[10px] md:border-r-[12px] border-r-transparent border-t-[13px] md:border-t-[16px] border-t-white" />
             </div>
           </div>
         </div>
@@ -52,14 +52,14 @@ const ChihuahuaCharacter = ({ currentReminder }: ChihuahuaCharacterProps) => {
         <img
           src={chihuahua}
           alt="Mi perrita chihuahua"
-          className="w-48 h-48 object-contain drop-shadow-2xl"
+          className="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-2xl"
         />
         
         {/* Floating Hearts */}
         {hearts.map((heart) => (
           <div
             key={heart.id}
-            className="absolute bottom-0 heart-float"
+            className="absolute bottom-0 heart-float hidden md:block"
             style={{
               left: `calc(50% + ${heart.x}px)`,
               animationDelay: `${heart.delay}s`,
@@ -82,10 +82,10 @@ const ChihuahuaCharacter = ({ currentReminder }: ChihuahuaCharacterProps) => {
       </div>
 
       {/* Decorative elements */}
-      <div className="flex gap-3 mt-4">
-        <span className="text-3xl animate-bounce" style={{ animationDelay: "0s" }}>⭐</span>
-        <span className="text-3xl animate-bounce" style={{ animationDelay: "0.2s" }}>💕</span>
-        <span className="text-3xl animate-bounce" style={{ animationDelay: "0.4s" }}>🐾</span>
+      <div className="flex gap-2 md:gap-3 mt-2 md:mt-4">
+        <span className="text-xl md:text-3xl animate-bounce" style={{ animationDelay: "0s" }}>⭐</span>
+        <span className="text-xl md:text-3xl animate-bounce" style={{ animationDelay: "0.2s" }}>💕</span>
+        <span className="text-xl md:text-3xl animate-bounce" style={{ animationDelay: "0.4s" }}>🐾</span>
       </div>
     </div>
   );
