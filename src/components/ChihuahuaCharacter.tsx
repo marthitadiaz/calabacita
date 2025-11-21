@@ -52,7 +52,7 @@ const ChihuahuaCharacter = ({ currentReminder }: ChihuahuaCharacterProps) => {
         <img
           src={chihuahua}
           alt="Mi perrita chihuahua"
-          className="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-2xl"
+          className="w-32 h-32 md:w-48 md:h-48 object-contain"
         />
         
         {/* Floating Hearts */}
