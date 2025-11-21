@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Calendar from "@/components/Calendar";
 import ChihuahuaCharacter from "@/components/ChihuahuaCharacter";
 import ReminderDialog from "@/components/ReminderDialog";
-
 const Index = () => {
   const [reminders, setReminders] = useState<Record<string, string>>({});
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -37,40 +36,44 @@ const Index = () => {
       setCurrentReminder(reminders[todayKey] || null);
     }
   }, [selectedDate, reminders]);
-
   const formatDateKey = (date: Date) => {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   };
-
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
     setDialogOpen(true);
   };
-
   const handleSaveReminder = (date: Date, reminder: string) => {
     const dateKey = formatDateKey(date);
-    const newReminders = { ...reminders, [dateKey]: reminder };
+    const newReminders = {
+      ...reminders,
+      [dateKey]: reminder
+    };
     setReminders(newReminders);
     localStorage.setItem("kawaii-reminders", JSON.stringify(newReminders));
   };
-
   const handleDeleteReminder = (date: Date) => {
     const dateKey = formatDateKey(date);
-    const newReminders = { ...reminders };
+    const newReminders = {
+      ...reminders
+    };
     delete newReminders[dateKey];
     setReminders(newReminders);
     localStorage.setItem("kawaii-reminders", JSON.stringify(newReminders));
   };
-
   const existingReminder = selectedDate ? reminders[formatDateKey(selectedDate)] : undefined;
-
-  return (
-    <div className="min-h-screen bg-background py-4 md:py-8 px-2 md:px-4 overflow-hidden relative">
+  return <div className="min-h-screen bg-background py-4 md:py-8 px-2 md:px-4 overflow-hidden relative">
       {/* Decorative elements - Positioned to not overlap content */}
       <div className="absolute top-2 left-2 md:top-10 md:left-10 text-2xl md:text-4xl animate-bounce z-0">✨</div>
-      <div className="absolute top-2 right-2 md:top-20 md:right-20 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.3s" }}>🌟</div>
-      <div className="absolute bottom-2 left-2 md:bottom-20 md:left-20 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.6s" }}>💝</div>
-      <div className="absolute bottom-2 right-2 md:bottom-32 md:right-16 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.9s" }}>🎀</div>
+      <div className="absolute top-2 right-2 md:top-20 md:right-20 text-2xl md:text-4xl animate-bounce z-0" style={{
+      animationDelay: "0.3s"
+    }}>🌟</div>
+      <div className="absolute bottom-2 left-2 md:bottom-20 md:left-20 text-2xl md:text-4xl animate-bounce z-0" style={{
+      animationDelay: "0.6s"
+    }}>💝</div>
+      <div className="absolute bottom-2 right-2 md:bottom-32 md:right-16 text-2xl md:text-4xl animate-bounce z-0" style={{
+      animationDelay: "0.9s"
+    }}>🎀</div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
@@ -116,7 +119,7 @@ const Index = () => {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-lg md:text-xl flex-shrink-0">🗨️</span>
-              <span>Los recordatorios del día aparecerán en la burbuja de tu perrita</span>
+              <span>Los recordatorios del día aparecerán en la burbuja de Calabacita</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-lg md:text-xl flex-shrink-0">✏️</span>
@@ -127,16 +130,7 @@ const Index = () => {
       </div>
 
       {/* Reminder Dialog */}
-      <ReminderDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        selectedDate={selectedDate}
-        onSave={handleSaveReminder}
-        onDelete={handleDeleteReminder}
-        existingReminder={existingReminder}
-      />
-    </div>
-  );
+      <ReminderDialog open={dialogOpen} onOpenChange={setDialogOpen} selectedDate={selectedDate} onSave={handleSaveReminder} onDelete={handleDeleteReminder} existingReminder={existingReminder} />
+    </div>;
 };
-
 export default Index;
