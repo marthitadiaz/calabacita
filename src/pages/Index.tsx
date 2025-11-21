@@ -66,13 +66,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background py-4 md:py-8 px-2 md:px-4 overflow-hidden relative">
-      {/* Decorative elements - Hidden on mobile */}
-      <div className="hidden md:block absolute top-10 left-10 text-4xl animate-bounce">✨</div>
-      <div className="hidden md:block absolute top-20 right-20 text-4xl animate-bounce" style={{ animationDelay: "0.3s" }}>🌟</div>
-      <div className="hidden md:block absolute bottom-20 left-20 text-4xl animate-bounce" style={{ animationDelay: "0.6s" }}>💝</div>
-      <div className="hidden md:block absolute bottom-32 right-16 text-4xl animate-bounce" style={{ animationDelay: "0.9s" }}>🎀</div>
+      {/* Decorative elements - Positioned to not overlap content */}
+      <div className="absolute top-2 left-2 md:top-10 md:left-10 text-2xl md:text-4xl animate-bounce z-0">✨</div>
+      <div className="absolute top-2 right-2 md:top-20 md:right-20 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.3s" }}>🌟</div>
+      <div className="absolute bottom-2 left-2 md:bottom-20 md:left-20 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.6s" }}>💝</div>
+      <div className="absolute bottom-2 right-2 md:bottom-32 md:right-16 text-2xl md:text-4xl animate-bounce z-0" style={{ animationDelay: "0.9s" }}>🎀</div>
 
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-4 md:mb-8">
           <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-2 flex items-center justify-center gap-2 md:gap-3">

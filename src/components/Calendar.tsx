@@ -147,7 +147,7 @@ const Calendar = ({ onDateSelect, reminders }: CalendarProps) => {
               >
                 {day}
                 {reminder && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-[8px] md:text-xs">
+                  <div className="absolute bottom-0.5 md:bottom-0 left-1/2 transform -translate-x-1/2 text-[10px] md:text-xs leading-none">
                     💕
                   </div>
                 )}
